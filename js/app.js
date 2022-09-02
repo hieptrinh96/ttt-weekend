@@ -19,12 +19,14 @@ let board, turn, winner;
 
 
 /*------------------------ Cached Element References ------------------------*/
-const squareEls = document.querySelector('.board');
+const squareEls = document.querySelectorAll('div');
 const messageEl = document.getElementById('message');
 
 
 /*----------------------------- Event Listeners -----------------------------*/
-squareEls.addEventListener('click', handleClick)
+squareEls.forEach(square => {
+  square.addEventListener('click', handleClick)
+})
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -38,12 +40,13 @@ function init() {
 
 function render() {
   board.forEach((square, i) => {
-    if (square === 1) squareEls[i].textContent = 'X';
+    if (square === 1) {
+      squareEls[i].textContent = 'X';
+    }
     if (square === -1) squareEls[i].textContent = 'O';
   })
   if (winner === null) {
-    turn *= -1;
-    messageEl.textContent = `Player ${turn === -1 ? 'Two' : 'One'}'s turn`;
+    messageEl.textContent = `Player ${turn === 1 ? 'One' : 'Two'}'s turn`;
   }
   else if (winner === 'Tie') messageEl.textContent = 'Looks like a tie';
 
@@ -51,7 +54,17 @@ function render() {
 
 function handleClick(evt) {
   const sqIdx = parseInt(evt.target.id.replace('sq', ''));
+  if (board[sqIdx] || winner !== null) return;
+  board[sqIdx] = turn;
+  turn *= -1;
+  render();
+  console.log(board[sqIdx])
+}
 
+function getWinner() {
+  winningCombos.forEach(combo => {
+
+  })
 }
 console.log(squareEls)
 console.log(board)
