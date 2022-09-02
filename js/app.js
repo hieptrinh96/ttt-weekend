@@ -1,16 +1,15 @@
 /*-------------------------------- Constants --------------------------------*/
 // winningCombos hold the eight possible winning combinations in a nested array
 const winningCombos = [
-  [[0, 0], [0, 1], [0, 2]],
-  [[1, 0], [1, 1], [1, 2]],
-  [[2, 0], [2, 1], [2, 2]],
-  [[0, 0], [1, 0], [2, 0]],
-  [[0, 1], [1, 1], [2, 1]],
-  [[0, 2], [1, 2], [2, 2]],
-  [[0, 0], [1, 1], [2, 2]],
-  [[0, 2], [1, 1], [2, 0]],
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
 ]
-
 
 /*---------------------------- Variables (state) ----------------------------*/
 // board - represent the state of the squares on the board
@@ -20,15 +19,13 @@ let board, turn, winner;
 
 
 /*------------------------ Cached Element References ------------------------*/
-const squareEls = document.querySelectorAll('div');
+const squareEls = document.querySelector('.board');
 const messageEl = document.getElementById('message');
 
 
 /*----------------------------- Event Listeners -----------------------------*/
+squareEls.addEventListener('click', handleClick)
 
-squareEls.forEach(square => {
-  square.addEventListener('click', handleClick);
-})
 
 /*-------------------------------- Functions --------------------------------*/
 init();
@@ -40,19 +37,22 @@ function init() {
 }
 
 function render() {
-  board.forEach(square => {
-    squareEls.forEach(div => {
-      square = div;
-    })
+  board.forEach((square, i) => {
+    if (square === 1) squareEls[i].textContent = 'X';
+    if (square === -1) squareEls[i].textContent = 'O';
   })
-  if (winner === null) turn *= -1;
-  else if (winner === 'T') {
-    `It looks like a tie!`
-    return;
+  if (winner === null) {
+    turn *= -1;
+    messageEl.textContent = `Player ${turn === -1 ? 'Two' : 'One'}'s turn`;
   }
-  else return `Congrats, you win.`;
+  else if (winner === 'Tie') messageEl.textContent = 'Looks like a tie';
+
 }
 
 function handleClick(evt) {
-  console.log(evt.target);
+  const sqIdx = parseInt(evt.target.id.replace('sq', ''));
+
 }
+console.log(squareEls)
+console.log(board)
+console.log(messageEl)
