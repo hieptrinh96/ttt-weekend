@@ -8,7 +8,7 @@ const winningCombos = [
   [1, 4, 7],
   [2, 5, 8],
   [0, 4, 8],
-  [2, 4, 6]
+  [2, 4, 6],
 ]
 
 /*---------------------------- Variables (state) ----------------------------*/
@@ -32,7 +32,7 @@ squareEls.forEach(square => {
 /*-------------------------------- Functions --------------------------------*/
 init();
 function init() {
-  board = new Array(9).fill(null);
+  board = [null, null, null, null, null, null, null, null, null];
   turn = 1;
   winner = null;
   render();
@@ -56,15 +56,21 @@ function handleClick(evt) {
   const sqIdx = parseInt(evt.target.id.replace('sq', ''));
   if (board[sqIdx] || winner !== null) return;
   board[sqIdx] = turn;
+  getWinner();
+  console.log('winner is', getWinner())
   turn *= -1;
   render();
-  console.log(board[sqIdx])
 }
 
 function getWinner() {
-  winningCombos.forEach(combo => {
-
-  })
+  for (let i = 0; i < winningCombos.length; i++) {
+    let total = 0;
+    for (let j = 0; j < winningCombos[i].length; j++) {
+      total += board[winningCombos[i][j]];
+      if (Math.abs(total) === 3) return turn;
+    }
+  }
+  return null;
 }
 console.log(squareEls)
 console.log(board)
