@@ -48,22 +48,25 @@ function render() {
   if (winner === null) {
     messageEl.textContent = `Player ${turn === 1 ? 'One' : 'Two'}'s turn`;
   }
-  else if (winner === 'Tie') messageEl.textContent = 'Looks like a tie';
-
+  else if (winner === -1) messageEl.textContent = `Player One wins!`;
+  else if (winner === 1) messageEl.textContent = `Player Two wins!`;
+  else {
+    messageEl.textContent = 'Looks like a tie';
+  }
 }
 
 function handleClick(evt) {
+  resetButton.removeAttribute('hidden');
   const sqIdx = parseInt(evt.target.id.replace('sq', ''));
   if (board[sqIdx] || winner !== null) return;
   board[sqIdx] = turn;
-  winner = getWinner();
-  console.log('winner is', getWinner())
   turn *= -1;
+  winner = getWinner();
   render();
 }
 
 function getWinner() {
-  if (!board.includes(null)) return winner = 'T';
+  if (!board.includes(null)) return winner = 'Tie';
   for (let i = 0; i < winningCombos.length; i++) {
     let total = 0;
     for (let j = 0; j < winningCombos[i].length; j++) {
