@@ -36,6 +36,7 @@ function init() {
   turn = 1;
   winner = null;
   render();
+  resetButton.setAttribute('hidden', true);
 }
 
 function render() {

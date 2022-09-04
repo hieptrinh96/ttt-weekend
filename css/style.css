@@ -10,6 +10,7 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   word-spacing: .5em;
 }
 
@@ -43,13 +44,13 @@ div {
   font-weight: bold;
 }
 
-#reset-container {
-  border: none;
-}
-
 #reset {
   font-size: 20px;
-  padding: 5px;
+  padding: 10px;
+  width: fit-content;
+  border: 1px solid white;
+  margin-top: 20px;
+  border-radius: 5%;
 }
 
 #design {
@@ -62,4 +63,15 @@ div {
 .h1Tag {
   color: black;
   font-size: 1em;
+}
+
+div:hover,
+div :focus {
+  background: #acdad1;
+}
+
+#reset:hover,
+#reset:focus {
+  background: #acdad1;
+  box-shadow: 5px 5px 5px 1px;
 }
