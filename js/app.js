@@ -66,7 +66,6 @@ function handleClick(evt) {
 }
 
 function getWinner() {
-  if (!board.includes(null)) return winner = 'Tie';
   for (let i = 0; i < winningCombos.length; i++) {
     let total = 0;
     for (let j = 0; j < winningCombos[i].length; j++) {
@@ -74,8 +73,7 @@ function getWinner() {
       if (Math.abs(total) === 3) return turn;
     }
   }
+  if (!board.includes(null)) return winner = 'Tie';
   return null;
 }
-console.log(squareEls)
-console.log(board)
-console.log(messageEl)
+
