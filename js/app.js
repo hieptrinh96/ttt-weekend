@@ -22,15 +22,18 @@ let board, turn, winner;
 const squareEls = document.querySelectorAll('div');
 const messageEl = document.getElementById('message');
 const resetButton = document.getElementById('reset');
+const startButton = document.getElementById('start-game');
 
 /*----------------------------- Event Listeners -----------------------------*/
 squareEls.forEach(square => {
   square.addEventListener('click', handleClick)
 })
 resetButton.addEventListener('click', init);
+startButton.addEventListener('click', revealAll);
 
 /*-------------------------------- Functions --------------------------------*/
 init();
+hideAll();
 function init() {
   board = [null, null, null, null, null, null, null, null, null];
   turn = 1;
@@ -78,3 +81,17 @@ function getWinner() {
   return null;
 }
 
+function hideAll() {
+  messageEl.setAttribute('hidden', true);
+  squareEls.forEach(square => {
+    square.setAttribute('hidden', true);
+  })
+}
+
+function revealAll() {
+  startButton.setAttribute('hidden', true);
+  messageEl.removeAttribute('hidden');
+  squareEls.forEach(square => {
+    square.removeAttribute('hidden');
+  })
+}

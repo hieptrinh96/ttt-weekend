@@ -46,8 +46,8 @@ div {
 
 #reset {
   font-size: 20px;
-  padding: 10px;
   width: fit-content;
+  padding: 10px;
   border: 1px solid white;
   margin-top: 20px;
   border-radius: 5%;
@@ -74,4 +74,18 @@ div :focus {
 #reset:focus {
   background: #acdad1;
   box-shadow: 5px 5px 5px 1px;
+}
+
+#start-game {
+  font-size: 50px;
+  margin-top: 20px;
+  padding: 10px;
+  border: 2px solid white;
+  border-radius: 30% 5%;
+}
+
+#start-game:hover,
+#start-game:focus {
+  background: #acdad1;
+
 }
